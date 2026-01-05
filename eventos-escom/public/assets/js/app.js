@@ -74,11 +74,24 @@
       if (mostrar) visibles++;
     }
 
+
+        // Re-animar las visibles (solo en HOME)
+    const visiblesAhora = Array.from(contenedor.querySelectorAll(".tarjeta"))
+      .filter(t => t.style.display !== "none");
+
+    visiblesAhora.forEach(t => {
+      t.classList.remove("visible");
+      // cascada rápida
+      setTimeout(() => t.classList.add("visible"), 10);
+    });
+
     if (estadoSin) estadoSin.style.display = visibles === 0 ? "" : "none";
   }
 
+  
   // Asegura que se aplique también al cargar
   aplicarFiltros();
+  
 
   buscador?.addEventListener("input", aplicarFiltros);
   filtro?.addEventListener("change", aplicarFiltros);
@@ -194,4 +207,51 @@ END:VCALENDAR`;
       setTimeout(() => (btnCalendario.textContent = original), 1200);
     });
   }
+    // =========================
+  //  ANIMACIÓN POR SECCIONES
+  // =========================
+  function marcarSecciones() {
+    // hero + secciones principales
+    document.querySelectorAll(".hero, .seccion").forEach((el) => {
+      el.classList.add("anim-seccion");
+    });
+
+    // tarjetas
+    document.querySelectorAll(".tarjeta").forEach((el) => {
+      el.classList.add("anim-item");
+    });
+  }
+
+  function activarAnimaciones() {
+    const secciones = document.querySelectorAll(".anim-seccion");
+    const items = document.querySelectorAll(".anim-item");
+
+    const ioSecciones = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          ioSecciones.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.12 });
+
+    secciones.forEach((s) => ioSecciones.observe(s));
+
+    // Cascada para tarjetas: al entrar en viewport, animación escalonada
+    const ioItems = new IntersectionObserver((entries) => {
+      const visibles = entries.filter((e) => e.isIntersecting).map((e) => e.target);
+      if (visibles.length) {
+        visibles.forEach((el, i) => {
+          setTimeout(() => el.classList.add("visible"), i * 60);
+        });
+      }
+    }, { threshold: 0.12 });
+
+    items.forEach((it) => ioItems.observe(it));
+  }
+
+  // Ejecutar al cargar
+  marcarSecciones();
+  activarAnimaciones();
+
 })();
