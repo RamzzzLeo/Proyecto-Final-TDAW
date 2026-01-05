@@ -1,0 +1,179 @@
+:root{
+  --fondo:#0b0c10;
+  --panel:rgba(255,255,255,.06);
+  --borde:rgba(255,255,255,.10);
+  --texto:rgba(255,255,255,.92);
+  --suave:rgba(255,255,255,.68);
+  --sombra:0 10px 30px rgba(0,0,0,.35);
+  --radio:18px;
+}
+
+:root[data-tema="claro"]{
+  --fondo:#f6f7fb;
+  --panel:rgba(15,23,42,.05);
+  --borde:rgba(15,23,42,.10);
+  --texto:rgba(15,23,42,.92);
+  --suave:rgba(15,23,42,.60);
+  --sombra:0 10px 30px rgba(15,23,42,.12);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(1100px 600px at 20% -10%, rgba(255,255,255,.10), transparent 60%),
+    radial-gradient(900px 500px at 85% 0%, rgba(255,255,255,.06), transparent 55%),
+    var(--fondo);
+  color:var(--texto);
+}
+
+.contenedor{width:min(1100px, calc(100% - 32px)); margin:0 auto;}
+.texto-suave{color:var(--suave);}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  backdrop-filter: blur(14px);
+  border-bottom:1px solid var(--borde);
+  background:linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.10));
+}
+:root[data-tema="claro"] .topbar{
+  background:linear-gradient(to bottom, rgba(255,255,255,.85), rgba(255,255,255,.55));
+}
+.topbar__fila{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:12px;}
+
+.marca{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;color:var(--texto);font-weight:800;letter-spacing:.2px;
+}
+.marca__punto{
+  width:10px;height:10px;border-radius:999px;
+  background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
+  box-shadow:0 0 0 4px rgba(255,255,255,.08);
+}
+
+.nav{display:flex;align-items:center;gap:10px;}
+.nav__link{
+  color:var(--suave);text-decoration:none;font-weight:700;
+  padding:10px 12px;border-radius:999px;border:1px solid transparent;
+}
+.nav__link:hover{color:var(--texto);border-color:var(--borde);background:var(--panel);}
+
+.boton{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:999px;
+  border:1px solid var(--borde);
+  background:rgba(255,255,255,.10);
+  color:var(--texto);text-decoration:none;font-weight:800;
+  box-shadow:0 10px 20px rgba(0,0,0,.18);
+  cursor:pointer;
+}
+.boton:hover{transform:translateY(-1px)}
+.boton--suave{background:rgba(255,255,255,.04);box-shadow:none;color:var(--suave);}
+.boton--suave:hover{color:var(--texto)}
+.boton--chico{padding:8px 12px;font-size:13px}
+
+.hero{
+  margin-top:18px;border:1px solid var(--borde);
+  border-radius:var(--radio);overflow:hidden;
+  background:var(--panel);box-shadow:var(--sombra);
+  position:relative;
+}
+.hero__fondo{
+  position:absolute;inset:0;opacity:.85;
+  background:
+    radial-gradient(900px 400px at 15% 20%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(800px 400px at 90% 30%, rgba(255,255,255,.10), transparent 55%),
+    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+}
+.hero__contenido{position:relative;padding:26px;}
+
+.chip{
+  display:inline-flex;align-items:center;
+  padding:7px 12px;border-radius:999px;
+  border:1px solid var(--borde);
+  color:var(--suave);background:rgba(255,255,255,.03);
+  font-weight:700;font-size:12px;
+}
+
+.h1{margin:10px 0 8px;font-size:clamp(24px,3vw,38px);line-height:1.1;letter-spacing:-.02em;}
+.h2{margin:0;font-size:18px;letter-spacing:-.01em;}
+.h3{margin:0;font-size:16px;letter-spacing:-.01em;}
+.subtitulo{margin:0;color:var(--suave);max-width:70ch;}
+
+.seccion{padding:20px 0 28px;}
+.seccion__encabezado{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:6px 0 14px;}
+
+.rejilla{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;}
+.tarjeta{
+  grid-column:span 4;border:1px solid var(--borde);
+  border-radius:var(--radio);overflow:hidden;
+  background:var(--panel);box-shadow:var(--sombra);
+}
+@media(max-width:980px){.tarjeta{grid-column:span 6}}
+@media(max-width:640px){.tarjeta{grid-column:span 12}}
+
+.tarjeta__barra{height:4px;background:linear-gradient(90deg, rgba(255,255,255,.85), rgba(255,255,255,.15));opacity:.7;}
+.tarjeta__contenido{padding:14px;display:flex;flex-direction:column;gap:10px;}
+.tarjeta__top{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.tarjeta__meta{font-size:12px}
+
+.etiqueta{
+  display:inline-flex;align-items:center;
+  padding:5px 10px;border-radius:999px;
+  border:1px solid var(--borde);
+  background:rgba(255,255,255,.03);
+  font-size:12px;font-weight:800;
+}
+
+.tarjeta__descripcion{
+  margin:0;color:var(--suave);font-size:13px;line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.tarjeta__pie{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+
+.link{
+  display:inline-flex;text-decoration:none;color:var(--suave);
+  border:1px solid transparent;border-radius:999px;padding:8px 10px;
+}
+.link:hover{color:var(--texto);border-color:var(--borde);background:var(--panel);}
+
+.estado{
+  border:1px solid var(--borde);background:var(--panel);
+  border-radius:var(--radio);padding:14px;box-shadow:var(--sombra);
+}
+
+.detalle{display:grid;grid-template-columns:1.5fr .9fr;gap:14px;margin-top:12px;}
+@media(max-width:900px){.detalle{grid-template-columns:1fr}}
+
+.panel{
+  border:1px solid var(--borde);
+  background:rgba(255,255,255,.04);
+  border-radius:var(--radio);
+  padding:14px;box-shadow:var(--sombra);
+}
+.panel__fila{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.panel__lista{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  padding:12px 0;border-top:1px solid var(--borde);border-bottom:1px solid var(--borde);
+  margin-bottom:12px;
+}
+.panel__texto{margin:0;color:var(--suave);}
+
+.footer{border-top:1px solid var(--borde);margin-top:28px;padding:18px 0;color:var(--suave);}
+.footer__fila{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+
+/* ===== Fix: espacio final para que nada tape el último evento ===== */
+main.contenedor{
+  padding-bottom: 40px; /* aire al final */
+}
+
+.footer{
+  margin-top: 0;        /* evita “encimarse” visualmente */
+}
+
+/* Por si el topbar/sombras generan overlay raro */
+.topbar{
+  box-shadow: none;
+}
