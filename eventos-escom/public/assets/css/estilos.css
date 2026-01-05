@@ -177,3 +177,188 @@ main.contenedor{
 .topbar{
   box-shadow: none;
 }
+/* =========================
+   PULIDO UI + ANIMACIONES
+   ========================= */
+
+/* Mejor separación general y que nada tape el final */
+main.contenedor{ padding: 18px 0 90px; }
+
+/* Grid más respirable */
+.rejilla{ gap: 16px; }
+
+/* Tarjetas más “premium” */
+.tarjeta{
+  transform: translateZ(0);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  box-shadow: 0 12px 35px rgba(0,0,0,.28);
+}
+
+:root[data-tema="claro"] .tarjeta{
+  box-shadow: 0 12px 30px rgba(15,23,42,.12);
+}
+
+/* Hover lift */
+.tarjeta:hover{
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.18);
+}
+
+/* Imagen de tarjeta */
+.tarjeta__img{
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--borde);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.tarjeta__img--vacia{
+  background:
+    radial-gradient(700px 240px at 20% 10%, rgba(255,255,255,.20), transparent 55%),
+    radial-gradient(500px 200px at 90% 30%, rgba(255,255,255,.10), transparent 55%),
+    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+}
+
+/* Botones más suaves */
+.boton{
+  transition: transform .15s ease, filter .15s ease, background .15s ease;
+}
+.boton:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+.boton:active{ transform: translateY(0px); }
+
+/* =========================
+   ANIMACIÓN POR SECCIONES
+   ========================= */
+.anim-seccion{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .55s ease, transform .55s ease;
+  will-change: opacity, transform;
+}
+.anim-seccion.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animación en cascada para tarjetas */
+.anim-item{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.anim-item.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respira más el encabezado de secciones */
+.seccion{ padding: 22px 0 30px; }
+.seccion__encabezado{ margin: 8px 0 16px; }
+
+/* Footer limpio */
+.footer{ margin-top: 18px; }
+
+/* =========================
+   BANNER PRINCIPAL
+   ========================= */
+.banner{
+  position: relative;
+  width: 100%;
+  height: 450px;
+  margin: 16px 0 26px;
+  border-radius: var(--radio);
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+
+:root[data-tema="claro"] .banner{
+  box-shadow: 0 18px 40px rgba(15,23,42,.18);
+}
+
+.banner__imagen{
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  filter: saturate(1.05) contrast(1.05);
+}
+
+/* Capa oscura elegante */
+.banner__overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.45),
+    rgba(0,0,0,.20)
+  );
+}
+
+/* Contenido */
+.banner__contenido{
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: 70ch;
+}
+
+.banner__titulo{
+  margin: 8px 0 6px;
+  font-size: clamp(26px, 4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: white;
+}
+
+.banner__texto{
+  margin: 0;
+  color: white;
+  font-size: 15px;
+}
+
+.chip{
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+
+/* Tema oscuro */
+:root:not([data-tema="claro"]) .banner .chip{
+  color: #dedede;
+  
+
+}
+
+
+/* Tema claro */
+:root[data-tema="claro"] .banner .chip{
+  color: #ffffff;
+ 
+ 
+}
+
+
+
+
+/* Responsive */
+@media (max-width: 1080px){
+  .banner{
+    height: 260px;
+  }
+  .banner__contenido{
+    padding: 20px;
+  }
+}
